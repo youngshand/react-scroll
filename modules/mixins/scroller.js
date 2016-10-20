@@ -21,8 +21,15 @@ module.exports = {
   },
 
   get: function(name) {
-    return __mapped[name] || document.getElementById(name);
+    if(!__mapped[name]){
+      name = name.indexOf('#') === 0 ? name.slice(1, name.length) : name;
+
+      return document.getElementById(name);
+    }
+
+    return __mapped[name];
   },
+
 
   setActiveLink: function(link) {
     __activeLink = link;
